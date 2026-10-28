@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillSwap | P2P Skill-Sharing & Session Booking Marketplace</title>
+  <meta name="description" content="Share a skill or learn something new. Browse local and online mentors for coding, language practice, baking, and music on SkillSwap." />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+  <!-- 1. Site Header & Navigation -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="logo">🤝 Skill<span>Swap</span></a>
+      
+      <nav aria-label="Main Navigation" class="main-nav">
+        <a href="#explore">Explore Skills</a>
+        <a href="#analytics">Analytics</a>
+        <a href="#bookings">My Bookings</a>
+        <button type="button" class="btn-primary" id="open-offer-modal-btn">
+          + Offer a Skill
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 2. Main Unique Page Content -->
+  <main class="container">
+
+    <!-- Hero Banner Section -->
+    <section class="hero-banner">
+      <h1>Share a Skill. Learn Something New.</h1>
+      <p>Connect 1-on-1 with peers for live coding help, language practice, sourdough baking, and more.</p>
+      
+      <!-- Search Bar -->
+      <div class="search-bar">
+        <label for="search-input" class="sr-only">Search skills or mentors</label>
+        <input 
+          type="search" 
+          id="search-input" 
+          placeholder="Search skills (e.g., Python, Spanish, Baking)..." 
+        />
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="category-pills" role="group" aria-label="Filter skills by category">
+        <button type="button" class="pill active">All Skills</button>
+        <button type="button" class="pill">Coding & Tech</button>
+        <button type="button" class="pill">Languages</button>
+        <button type="button" class="pill">Culinary & Baking</button>
+        <button type="button" class="pill">Music & Arts</button>
+      </div>
+    </section>
+
+    <!-- 3. Mentor Skill Directory -->
+    <section id="explore" class="marketplace-section">
+      <div class="section-header">
+        <h2>Available Mentors & Sessions</h2>
+        <span class="results-count">Showing 4 skills</span>
+      </div>
+
+      <div class="skill-grid"></div>
+    </section>
+
+    <!-- 4. NEW PHASE 2 SECTION: Chart.js Analytics Dashboard -->
+    <section id="analytics" class="analytics-section">
+      <h2>📊 Weekly Learning Activity & Popular Skills</h2>
+      <p class="section-subtitle">Powered by <code>chart.js</code> — updates automatically when you add a new skill!</p>
+      <div class="chart-card">
+        <canvas id="skills-chart"></canvas>
+      </div>
+    </section>
+
+    <!-- 5. Upcoming Bookings Section (Formatted with Day.js) -->
+    <section id="bookings" class="bookings-section">
+      <h2>My Upcoming Sessions</h2>
+      <div class="booking-list"></div>
+    </section>
+
+  </main>
+
+  <!-- 6. Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 SkillSwap P2P Marketplace. Bundled with Vite, Day.js & Chart.js.</p>
+    </div>
+  </footer>
+
+  <!-- 7. MODAL 1: Offer a New Skill -->
+  <dialog id="offer-modal" class="modal">
+    <form id="offer-form" class="modal-content">
+      <div class="modal-header">
+        <h3>Offer a New Skill</h3>
+        <button type="button" class="close-btn" id="close-offer-modal" aria-label="Close modal">✕</button>
+      </div>
+
+      <label for="skill-title">Skill Title</label>
+      <input type="text" id="skill-title" placeholder="e.g., UI/UX Figma Basics" required />
+
+      <label for="skill-category">Category</label>
+      <select id="skill-category" required>
+        <option value="Coding & Tech">Coding & Tech</option>
+        <option value="Languages">Languages</option>
+        <option value="Culinary & Baking">Culinary & Baking</option>
+        <option value="Music & Arts">Music & Arts</option>
+      </select>
+
+      <label for="mentor-name">Your Name</label>
+      <input type="text" id="mentor-name" placeholder="e.g., Jordan Lee" required />
+
+      <label for="mentor-role">Your Role / Experience</label>
+      <input type="text" id="mentor-role" placeholder="e.g., Product Designer" required />
+
+      <label for="skill-desc">What will learners achieve?</label>
+      <textarea id="skill-desc" rows="3" placeholder="Describe your session in 1-2 sentences..." required></textarea>
+
+      <button type="submit" class="btn-primary full-width">Publish Skill Listing</button>
+    </form>
+  </dialog>
+
+  <!-- 8. MODAL 2: Book a Session & Credit Calculator -->
+  <dialog id="book-modal" class="modal">
+    <form id="book-form" class="modal-content">
+      <div class="modal-header">
+        <h3 id="book-modal-title">Book Session</h3>
+        <button type="button" class="close-btn" id="close-book-modal" aria-label="Close modal">✕</button>
+      </div>
+
+      <label for="session-date">Preferred Date & Time</label>
+      <input type="datetime-local" id="session-date" required />
+
+      <label for="session-duration">Session Duration</label>
+      <select id="session-duration">
+        <option value="30">30 Minutes (0.5 Credits)</option>
+        <option value="60" selected>60 Minutes (1 Credit)</option>
+        <option value="90">90 Minutes (1.5 Credits)</option>
+      </select>
+
+      <div class="cost-summary">
+        <span>Total Session Cost:</span>
+        <strong id="calculated-cost">1 Credit</strong>
+      </div>
+
+      <button type="submit" class="btn-primary full-width">Confirm Booking</button>
+    </form>
+  </dialog>
+
+  <!-- 9. Vite ES Module Entry Point -->
+  <script type="module" src="/main.js"></script>
+</body>
+</html>
